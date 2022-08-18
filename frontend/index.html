@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Revendas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="light-blue darken-4">
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a href="index.html" class="brand-logo">Cadastro de Revendas</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li id="liPessoas"><a href="#!" v-on:click="navega('cadPessoas.html')">Pessoas</a></li>
+                        <li id="liVeiculos"><a href="#!" v-on:click="navega('cadVeiculos.html')">Veículos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="login" class="container">
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <div class="card light-blue darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Login</span>
+                            <div class="input-field">
+                                <label for="usuario">Usuário</label>
+                                <input type="text" id="usuario" class="validate white-text" v-model="login.usuario">
+                            </div>
+                            <div class="input-field">
+                                <label for="senha">Senha</label>
+                                <input type="password" id="senha" class="validate white-text" v-model="login.senha">
+                            </div>
+                            <div id="validaLogin" class="red-text center-align hide">
+                                <h6>Usuário e/ou senha inválido(s)!</h6>
+                            </div>
+                        </div>
+                        <div class="card-action center-align">
+                            <button class="btn" v-on:click="fazerLogin()">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="conteudo">
+            <div id="bemvindo" class="container row center-align hide">
+                <h1>Bem-vindo!</h1>
+                <button class="btn red" v-on:click="fazerLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vapp = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    login: {
+                        usuario: null,
+                        senha: null,
+                    },
+                };
+            },
+            mounted() {
+                this.removerLogin();
+            },
+            methods: {
+                fazerLogin() {
+                    let _this = this;
+
+                    if (sessionStorage.getItem('token') == null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/login',
+                            method: 'POST',
+                            data: {
+                                usuario: _this.login.usuario,
+                                senha: _this.login.senha,
+                            },
+                            success(r) {
+                                sessionStorage.setItem('token', r);
+                                _this.removerLogin();
+                            },
+                            error(x) {
+                                $('#validaLogin').removeClass('hide');
+                            },
+                        });
+                    }
+                },
+
+                fazerLogout() {
+                    if (sessionStorage.getItem('token') != null) {
+                        sessionStorage.removeItem('token');
+                        location.reload();
+                    }
+                },
+
+                removerLogin() {
+                    if (sessionStorage.getItem('token') != null) {
+                        $('#login').addClass('hide');
+                        $('#bemvindo').removeClass('hide');
+                    }
+                },
+
+                navega(pagina) {
+                    if (sessionStorage.getItem('token') != null) {
+                        $('#conteudo').load(pagina);
+
+                        if (pagina == 'cadPessoas.html') {
+                            $('#liPessoas').addClass('active');
+                            $('#liVeiculos').removeClass('active');
+                        } else {
+                            $('#liVeiculos').addClass('active');
+                            $('#liPessoas').removeClass('active');
+                        }
+                    } else {
+                        alert('Faça login para acessar esta página!');
+                    }
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>

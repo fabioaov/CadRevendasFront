@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="appPessoas" class="container">
+        <div class="row">
+            <div class="col m12 l4">
+                <div class="card grey darken-4 z-depth-5 white-text">
+                    <div class="card-content">
+                        <span class="card-title">Cadastro de Pessoas</span>
+                        <br>
+                        <div class="input-field">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" class="validate white-text" v-model="pessoa.nome">
+                        </div>
+                        <div class="input-field">
+                            <label for="sobrenome">Sobrenome</label>
+                            <input type="text" id="sobrenome" class="validate white-text" v-model="pessoa.sobrenome">
+                        </div>
+                        <div>
+                            <label for="nascimento">Data de Nascimento</label>
+                            <input type="date" class="validate white-text" v-model="pessoa.nascimento">
+                        </div>
+                        <div class="input-field">
+                            <label for="sexo">Sexo</label>
+                            <input type="text" name="sexo" id="sexo" class="validate white-text" v-model="pessoa.sexo">
+                        </div>
+                        <div class="input-field">
+                            <label for="ddd">DDD</label>
+                            <input type="text" name="ddd" maxlength="3" id="ddd" class="validate white-text" v-model="pessoa.ddd">
+                        </div>
+                        <div class="input-field">
+                            <label for="telefone">Telefone</label>
+                            <input type="text" name="telefone" maxlength="9" id="telefone" class="validate white-text" v-model="pessoa.telefone">
+                        </div>
+                        <div class="input-field">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" class="validate white-text" v-model="pessoa.cidade">
+                        </div>
+                        <div class="input-field">
+                            <label for="estado">Estado</label>
+                            <input type="text" id="estado" class="validate white-text" v-model="pessoa.estado">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn" v-on:click="salvar()">Salvar</button>
+                        <button class="btn red" v-on:click="excluir()">Excluir</button>
+                        <button class="btn orange" v-on:click="cancelar()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col m12 l8">
+                <div class="card blue-grey darken-4 white-text">
+                    <div class="card-content">
+                        <span class="card-title">Lista de Pessoas</span>
+                        <br>
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Sobrenome</th>
+                                    <th>Nascimento</th>
+                                    <th>Sexo</th>
+                                    <th>DDD</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="cursor: pointer" v-for="(p, index) in pessoas" v-on:click="selecionarPessoa(p)">
+                                    <td>{{p.nome}}</td>
+                                    <td>{{p.sobrenome}}</td>
+                                    <td>{{p.nascimento}}</td>
+                                    <td>{{p.sexo}}</td>
+                                    <td>{{p.ddd}}</td>
+                                    <td>{{p.telefone}}</td>
+                                    <td>{{p.cidade}}</td>
+                                    <td>{{p.estado}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vapp = new Vue({
+            el: '#appPessoas',
+            data() {
+                return {
+                    pessoa: {
+                        nome: null,
+                        sobrenome: null,
+                        sexo: null,
+                        nascimento: null,
+                        ddd: null,
+                        telefone: null,
+                        estado: null,
+                        cidade: null,
+                    },
+                    pessoas: [],
+                };
+            },
+            mounted() {
+                this.getPessoas();
+            },
+            methods: {
+                getPessoas() {
+                    let _this = this;
+
+                    $.ajax({
+                        url: 'http://localhost:8080/pessoa/',
+                        method: 'GET',
+                        beforeSend(xhr) {
+                            xhr.setRequestHeader(
+                                'Authorization',
+                                'Bearer ' + sessionStorage.getItem('token')
+                            );
+                        },
+                        success(r) {
+                            _this.pessoas = r;
+                        },
+                        error(x) {
+                            console.log(`Erro: ${x}`);
+                        },
+                    });
+                },
+
+                selecionarPessoa(p) {
+                    this.pessoa = p;
+                },
+
+                salvar() {
+                    let _this = this;
+
+                    if (_this.pessoa.id == null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/pessoa',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(_this.pessoa),
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getPessoas();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        });
+                    } else {
+                        $.ajax({
+                            url: 'http://localhost:8080/pessoa',
+                            method: 'PUT',
+                            contentType: 'application/json',
+                            data: JSON.stringify(_this.pessoa),
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getPessoas();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        });
+                    }
+                },
+
+                excluir() {
+                    let _this = this;
+                    let p = _this.pessoa;
+
+                    if (_this.pessoa.id != null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/pessoa/' + _this.pessoa.id,
+                            method: 'DELETE',
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getPessoas();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        })
+                    }
+                },
+
+                cancelar() {
+                    this.pessoa = {
+                        nome: null,
+                        sobrenome: null,
+                        sexo: null,
+                        nascimento: null,
+                        ddd: null,
+                        telefone: null,
+                        estado: null,
+                        cidade: null,
+                    };
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="appVeiculos" class="container">
+        <div class="row">
+            <div class="col m12 l4">
+                <div class="card grey lighten-4 z-depth-5">
+                    <div class="card-content">
+                        <span class="card-title">Cadastro de Veículos</span>
+                        <br>
+                        <div class="input-field">
+                            <label for="marca">Marca</label>
+                            <input type="text" id="marca" class="validate black-text" v-model="veiculo.marca">
+                        </div>
+                        <div class="input-field">
+                            <label for="modelo">Modelo</label>
+                            <input type="text" id="modelo" class="validate black-text" v-model="veiculo.modelo">
+                        </div>
+                        <div class="input-field">
+                            <label for="ano">Ano</label>
+                            <input type="number" min="1886" max="2022" id="ano" class="validate black-text" v-model="veiculo.ano">
+                        </div>
+                        <div class="input-field">
+                            <label for="renavam">RENAVAM</label>
+                            <input type="number" name="renavam" max="99999999999" id="renavam" class="validate black-text" v-model="veiculo.renavam">
+                        </div>
+                        <div class="input-field">
+                            <label for="placa">Placa</label>
+                            <input type="text" name="placa" maxlength="8" id="placa" class="validate black-text" v-model="veiculo.placa">
+                        </div>
+                        <div class="input-field">
+                            <label for="cor">Cor</label>
+                            <input type="text" name="cor" id="cor" class="validate black-text" v-model="veiculo.cor">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn" v-on:click="salvar()">Salvar</button>
+                        <button class="btn red" v-on:click="excluir()">Excluir</button>
+                        <button class="btn orange" v-on:click="cancelar()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col m12 l8">
+                <div class="card blue-grey darken-4 white-text">
+                    <div class="card-content">
+                        <span class="card-title">Lista de Veículos</span>
+                        <br>
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Ano</th>
+                                    <th>RENAVAM</th>
+                                    <th>Placa</th>
+                                    <th>Cor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="cursor: pointer" v-for="(v, index) in veiculos" v-on:click="selecionarVeiculo(v)">
+                                    <td>{{v.marca}}</td>
+                                    <td>{{v.modelo}}</td>
+                                    <td>{{v.ano}}</td>
+                                    <td>{{v.renavam}}</td>
+                                    <td>{{v.placa}}</td>
+                                    <td>{{v.cor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vapp = new Vue({
+            el: '#appVeiculos',
+            data() {
+                return {
+                    veiculo: {
+                        marca: null,
+                        modelo: null,
+                        ano: null,
+                        renavam: null,
+                        placa: null,
+                        cor: null,
+                    },
+                    veiculos: [],
+                };
+            },
+            mounted() {
+                this.getVeiculos();
+            },
+            methods: {
+                getVeiculos() {
+                    let _this = this;
+
+                    $.ajax({
+                        url: 'http://localhost:8080/veiculo',
+                        method: 'GET',
+                        beforeSend(xhr) {
+                            xhr.setRequestHeader(
+                                'Authorization',
+                                'Bearer ' + sessionStorage.getItem('token')
+                            );
+                        },
+                        success(r) {
+                            _this.veiculos = r;
+                        },
+                        error(x) {
+                            console.log(`Erro: ${x}`);
+                        },
+                    });
+                },
+
+                selecionarVeiculo(v) {
+                    this.veiculo = v;
+                },
+
+                salvar() {
+                    let _this = this;
+
+                    if (_this.veiculo.id == null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/veiculo',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(_this.veiculo),
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getVeiculos();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        });
+                    } else {
+                        $.ajax({
+                            url: 'http://localhost:8080/veiculo',
+                            method: 'PUT',
+                            contentType: 'application/json',
+                            data: JSON.stringify(_this.veiculo),
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getVeiculos();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        });
+                    }
+                },
+
+                excluir() {
+                    let _this = this;
+                    let v = _this.veiculo;
+
+                    if (_this.veiculo.id != null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/veiculo/' + _this.veiculo.id,
+                            method: 'DELETE',
+                            beforeSend(xhr) {
+                                xhr.setRequestHeader(
+                                    'Authorization',
+                                    'Bearer ' + sessionStorage.getItem('token')
+                                );
+                            },
+                            success(r) {
+                                _this.getVeiculos();
+                                _this.cancelar();
+                            },
+                            error(x) {
+                                console.log(`Erro: ${x}`);
+                            },
+                        })
+                    }
+                },
+
+                cancelar() {
+                    this.veiculo = {
+                        marca: null,
+                        modelo: null,
+                        ano: null,
+                        renavam: null,
+                        placa: null,
+                        cor: null,
+                    };
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>
