@@ -59,7 +59,7 @@
                         <div class="row">
                             <div class="input-field col s10">
                                 <label for="pesquisa">Pesquisar</label>
-                                <input type="text" id="pesquisa" class="validate white-text">
+                                <input type="text" id="pesquisa" class="validate white-text" v-model="pesquisa">
                             </div>
                             <div class="input-field col s2">
                                 <button class="btn" v-on:click="pesquisar()">Pesquisar</button>
@@ -107,6 +107,7 @@
                         cor: null,
                     },
                     veiculos: [],
+                    pesquisa: "",
                 };
             },
             mounted() {
@@ -218,6 +219,27 @@
                         placa: null,
                         cor: null,
                     };
+                },
+
+                pesquisar() {
+                    let _this = this;
+
+                    $.ajax({
+                        url: 'http://localhost:8080/veiculo/pesquisa?marca=' + _this.pesquisa,
+                        method: 'GET',
+                        beforeSend(xhr) {
+                            xhr.setRequestHeader(
+                                'Authorization',
+                                'Bearer ' + sessionStorage.getItem('token')
+                            );
+                        },
+                        success(r) {
+                            _this.veiculos = r;
+                        },
+                        error(x) {
+                            console.log(`Erro: ${x}`);
+                        },
+                    });
                 },
             }
         });
