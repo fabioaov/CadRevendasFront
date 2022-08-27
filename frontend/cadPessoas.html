@@ -64,6 +64,15 @@
                 <div class="card blue-grey darken-4 white-text">
                     <div class="card-content">
                         <span class="card-title">Lista de Pessoas</span>
+                        <div class="row">
+                            <div class="input-field col s10">
+                                <label for="pesquisa">Pesquisa</label>
+                                <input type="text" id="pesquisa" class="validate white-text">
+                            </div>
+                            <div class="input-field col s2">
+                                <button class="btn" v-on:click="pesquisar()">Pesquisar</button>
+                            </div>
+                        </div>
                         <br>
                         <table class="responsive-table">
                             <thead>
