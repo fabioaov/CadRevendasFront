@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registra-se</title>
+    <style>
+        .res {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .title {
+            background-color: darkslategrey;
+            border: 1px solid white;
+            color: white;
+            text-align: center;
+            font-size: 25px;
+
+        }
+
+        .ul {
+            background-color: darkslategrey;
+            padding: 10px;
+            border: 2px solid black;
+            list-style-type: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ids {
+            font-size: 20px;
+        }
+        .enviar{
+            margin-left: 85px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">Registra-se <br></h1>
+    <form name="meu_form" class="res">
+
+        <div class="ids">
+            <ul class="ul">
+                <li>
+                    <label for="email">Email</label>
+                    <input type="email" id="emailid" placeholder="fulano@mail.com" name="email" />
+
+                </li>
+                <li>
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senhaid" placeholder="*****" name="senha" minlength="8" required />
+
+                </li>
+
+                <li>
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senhasid" placeholder="*****" name="senha" minlength="8" required />
+                </li>
+                <li>
+                    <input type="submit" class="enviar" onclick="Enviar();" value="Registrar" />
+                </li>
+            </ul>
+        </div>
+    </form>
+</body>
+<script>
+    function Enviar() {
+
+var nome = document.getElementById("emailid");
+
+if (nome.value != "") {
+    alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram Registrado com sucesso');
+}
+
+}
+</script>
+
+</html>
