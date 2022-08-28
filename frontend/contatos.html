@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPORTE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+</head>
+
+<style>
+    body {
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    nav {
+        background-color: #ef6c00;
+        color: black;
+    }
+    
+    div#tContato {
+        background-color: #fb8c00;
+        color: black;
+    }
+    
+    div#cContato {
+        background-color: #ffe0b2;
+        color: black;
+    }
+    
+    div#mCard {
+        background-color: #ef6c00;
+        color: black;
+    }
+    
+    ul#nomeL {
+        margin-block: initial;
+        font-size: 30px;
+    }
+    
+    .dark-mode {
+        background-color: #263238;
+        color: white;
+    }
+    
+    .dark-mode nav {
+        background-color: #37474f;
+        color: white;
+    }
+    
+    .dark-mode div#tContato {
+        background-color: #37474f;
+        color: white;
+    }
+    
+    .dark-mode div#cContato {
+        background-color: #37474f;
+        color: white;
+    }
+    
+    .dark-mode div#mCard {
+        background-color: #263238;
+        color: white;
+    }
+    
+    .light-mode {
+        background-color: white;
+        color: black;
+    }
+    
+    .light-mode nav {
+        background-color: #ef6c00;
+        color: black;
+    }
+    
+    .light-mode div#tContato {
+        background-color: #fb8c00;
+        color: black;
+    }
+    
+    .light-mode div#cContato {
+        background-color: #ffe0b2;
+        color: black;
+    }
+    
+    .light-mode div#mCard {
+        background-color: #ef6c00;
+        color: black;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a class="brand-logo">SUPORTE</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="index.html">INÍCIO</a></li>
+                        <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="darkMode()">
+                                <i class="material-icons" style="color: black;">brightness_4</i>
+                            </button></li>
+                        <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="lightMode()">
+                                <i class="material-icons" style="color: white;">brightness_5</i>
+                            </button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col s8">
+                    <div id="tContato" class="card" style="margin-top: 20%;">
+                        <div class="card-image">
+                            <img src="img/1866c184a7d1b635ad8c1c6268d86822.jpg">
+                            <span class="card-title" style="font-size: 35px;">PRECISANDO DE AJUDA?</span>
+                        </div>
+                        <div class="card-content white-text" style="font-size: 30px; text-align: center;">
+                            VOCÊ PODE NOS MANDAR UMA MENSAGEM COM SUA DIFICULDADE PELO NOSSO LINKEDIN!
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4 m4" style="margin-top: 25%;">
+                    <div id="cContato" class="card">
+                        <div id="mCard" class="card" style="text-align: center;">
+                            <span class=" card-title" style="font-size: 30px;">CONTATO</span>
+                        </div>
+                        <div class="card-content ">
+                            <ul id="nomeL">
+                                <li>
+                                    <a href="https://www.linkedin.com/in/andre-luiz-domingos-montero-b588b4173/ " style="color: black;"><img src="img/256x256bb.png " style="height: 20px; width: 20px;"> ANDRE</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/fabioaov/ " style="color: black;"><img src="img/256x256bb.png " style="height: 20px; " width="20px "> FABIO</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/cayanna/ " style="color: black;"><img src="img/256x256bb.png " style="height: 20px; " width="20px "> HENRIQUE</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/welder-souza-6aa846205/ " style="color: black;"><img src="img/256x256bb.png " style="height: 20px; " width="20px "> WELDER</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="conteudo ">
+                    <div id="bemvindo " class="container row center-align hide ">
+                        <h1>Bem-vindo!</h1>
+                        <button class="btn red " v-on:click="fazerLogout() ">Logout</button>
+                    </div>
+                </div>
+            </div>
+</body>
+
+<script>
+    function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext ");
+        element.className = "dark-mode ";
+    }
+
+    function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("LightModetext ");
+        element.className = "light-mode ";
+    }
+</script>
+
+</html>

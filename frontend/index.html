@@ -25,7 +25,7 @@
             right: 30px;
             display: none
         }
-
+        
         .cookieConsentContainer .cookieTitle a {
             font-family: OpenSans, arial, sans-serif;
             color: #fff;
@@ -33,7 +33,7 @@
             line-height: 20px;
             display: block
         }
-
+        
         .cookieConsentContainer .cookieDesc p {
             margin: 0;
             padding: 0;
@@ -44,13 +44,13 @@
             display: block;
             margin-top: 10px
         }
-
+        
         .cookieConsentContainer .cookieDesc a {
             font-family: OpenSans, arial, sans-serif;
             color: #fff;
             text-decoration: underline
         }
-
+        
         .cookieConsentContainer .cookieButton a {
             display: inline-block;
             font-family: OpenSans, arial, sans-serif;
@@ -64,21 +64,20 @@
             text-align: center;
             transition: background .3s
         }
-
+        
         .cookieConsentContainer .cookieButton a:hover {
             cursor: pointer;
             background: #3e9b67
         }
-
+        
         .cont {
-            background-color: #263238 ;
+            background-color: #263238;
             color: #fff;
             font-size: 15px;
-
             margin: 0;
             padding: 0;
         }
-
+        
         .links {
             font-size: 20px;
             list-style: none;
@@ -87,9 +86,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
         }
-
+        
         @media (max-width:980px) {
             .cookieConsentContainer {
                 bottom: 0 !important;
@@ -100,59 +98,61 @@
     </style>
 
 </head>
-
 <style>
     body {
         background-color: white;
         color: black;
         font-family: 'Courier New', Courier, monospace;
     }
-
+    
     nav {
         background-color: #01579b;g
         color: black;
     }
-
+    
     div#cardLogin {
         background-color: #01579b;
         color: black;
     }
-
+    
     .dark-mode {
         background-color: #263238;
         color: white;
     }
-
+    
     .dark-mode nav {
         background-color: #37474f;
         color: white;
     }
-
+    
     .dark-mode div#cardLogin {
         background-color: #37474f;
         color: white;
     }
-
+    
     .dark-mode button#bLogin {
         background-color: #607d8b;
     }
-
+    
     .light-mode {
         background-color: white;
         color: black;
     }
-
+    
     .light-mode nav {
         background-color: #01579b;
         color: black;
     }
-
+    
     .light-mode div#cardLogin {
         background-color: #01579b;
         color: black;
     }
-
-
+    
+    .btn-floating#btnContato {
+        margin-top: 10px;
+        margin-right: 10px;
+    }
 </style>
 
 <body>
@@ -160,8 +160,7 @@
         <nav>
             <div class="nav-wrapper">
                 <div class="container">
-                    <a href="index.html"><img class="responsive-img" src="img/Logotipo.png"
-                            style="margin-right: 10px;"></a>
+                    <a href="index.html"><img class="responsive-img" src="img/Logotipo.png" style="margin-right: 10px;"></a>
                     <a href="index.html" class="brand-logo">CADASTRO DE REVENDAS</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li id="liPessoas"><a href="#!" v-on:click="navega('cadPessoas.html')">PESSOAS</a></li>
@@ -214,157 +213,160 @@
                 </div>
             </div>
         </div>
-
-        <div class="cont">
-            <p class="cont">Nossos Contatos</p>
-            <ul class="links">
-                <li><a class="redes" href="https://www.linkedin.com/in/andre-luiz-domingos-montero-b588b4173/"
-                        target="_blank">Linkedin Andre</a></li>
-                <li><a class="redes" href="https://www.linkedin.com/in/fabioaov/" target="_blank">Linkedin Fabio</a>
-                </li>
-                <li><a class="redes" href="https://www.linkedin.com/in/cayanna/" target="_blank">Linkedin Henrique</a>
-                </li>
-                <li><a class="redes" href="https://www.linkedin.com/in/welder-souza-6aa846205/" target="_blank">Linkedin Welder</a></li>
-                
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large waves-effect waves-light blue light-blue darken-4">
+                <i class="material-icons">help_outline</i>
+            </a>
+            <ul>
+                <a id="btnContato" href="contatos.html" class="btn-floating"><i class="material-icons">account_circle</i></a>
             </ul>
         </div>
-        
-        <script>
-            function darkMode() {
-                var element = document.body;
-                var content = document.getElementById("DarkModetext");
-                element.className = "dark-mode";
-            }
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var fab = document.querySelectorAll('.fixed-action-btn');
+            M.FloatingActionButton.init(fab, {
+                direction: "left",
+                hoverEnabled: false
+            })
+        })
 
-            function lightMode() {
-                var element = document.body;
-                var content = document.getElementById("LightModetext");
-                element.className = "light-mode";
-            }
-            var vapp = new Vue({
-                el: '#app',
-                data() {
-                    return {
-                        login: {
-                            usuario: null,
-                            senha: null,
-                        },
-                    };
+        function darkMode() {
+            var element = document.body;
+            var content = document.getElementById("DarkModetext");
+            element.className = "dark-mode";
+        }
+
+        function lightMode() {
+            var element = document.body;
+            var content = document.getElementById("LightModetext");
+            element.className = "light-mode";
+        }
+
+        var vapp = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    login: {
+                        usuario: null,
+                        senha: null,
+                    },
+                };
+            },
+            mounted() {
+                this.removerLogin();
+            },
+            methods: {
+                fazerLogin() {
+                    let _this = this;
+
+                    if (sessionStorage.getItem('token') == null) {
+                        $.ajax({
+                            url: 'http://localhost:8080/login',
+                            method: 'POST',
+                            data: {
+                                usuario: _this.login.usuario,
+                                senha: _this.login.senha,
+                            },
+                            success(r) {
+                                sessionStorage.setItem('token', r);
+                                _this.removerLogin();
+                            },
+                            error(x) {
+                                $('#validaLogin').removeClass('hide');
+                            },
+                        });
+                    }
                 },
-                mounted() {
-                    this.removerLogin();
+
+                fazerLogout() {
+                    if (sessionStorage.getItem('token') != null) {
+                        sessionStorage.removeItem('token');
+                        location.reload();
+                    }
                 },
-                methods: {
-                    fazerLogin() {
-                        let _this = this;
 
-                        if (sessionStorage.getItem('token') == null) {
-                            $.ajax({
-                                url: 'http://localhost:8080/login',
-                                method: 'POST',
-                                data: {
-                                    usuario: _this.login.usuario,
-                                    senha: _this.login.senha,
-                                },
-                                success(r) {
-                                    sessionStorage.setItem('token', r);
-                                    _this.removerLogin();
-                                },
-                                error(x) {
-                                    $('#validaLogin').removeClass('hide');
-                                },
-                            });
-                        }
-                    },
+                removerLogin() {
+                    if (sessionStorage.getItem('token') != null) {
+                        $('#login').addClass('hide');
+                        $('#bemvindo').removeClass('hide');
+                    }
+                },
 
-                    fazerLogout() {
-                        if (sessionStorage.getItem('token') != null) {
-                            sessionStorage.removeItem('token');
-                            location.reload();
-                        }
-                    },
+                navega(pagina) {
+                    if (sessionStorage.getItem('token') != null) {
+                        $('#conteudo').load(pagina);
 
-                    removerLogin() {
-                        if (sessionStorage.getItem('token') != null) {
-                            $('#login').addClass('hide');
-                            $('#bemvindo').removeClass('hide');
-                        }
-                    },
-
-                    navega(pagina) {
-                        if (sessionStorage.getItem('token') != null) {
-                            $('#conteudo').load(pagina);
-
-                            if (pagina == 'cadPessoas.html') {
-                                $('#liPessoas').addClass('active');
-                                $('#liVeiculos').removeClass('active');
-                            } else {
-                                $('#liVeiculos').addClass('active');
-                                $('#liPessoas').removeClass('active');
-                            }
+                        if (pagina == 'cadPessoas.html') {
+                            $('#liPessoas').addClass('active');
+                            $('#liVeiculos').removeClass('active');
                         } else {
-                            alert('Faça login para acessar esta página!');
+                            $('#liVeiculos').addClass('active');
+                            $('#liPessoas').removeClass('active');
                         }
-                    },
+                    } else {
+                        alert('Faça login para acessar esta página!');
+                    }
                 },
-            });
-        </script>
-        <script>
-            var purecookieTitle = "Cookies.",
-                purecookieDesc = "Este site utiliza cookies para te proporcionar uma melhor experiência. Ao continuar navegando, você aceita nossa.",
-                purecookieLink = '<a href="https://unisales.br/" target="_blank">Politica de privacidade</a>',
-                purecookieButton = "Ok";
+            },
+        });
+    </script>
+    <script>
+        var purecookieTitle = "Cookies.",
+            purecookieDesc = "Este site utiliza cookies para te proporcionar uma melhor experiência. Ao continuar navegando, você aceita nossa.",
+            purecookieLink = '<a href="https://unisales.br/" target="_blank">Politica de privacidade</a>',
+            purecookieButton = "Ok";
 
-            function pureFadeIn(e, o) {
-                var i = document.getElementById(e);
-                i.style.opacity = 0, i.style.display = o || "block",
-                    function e() {
-                        var o = parseFloat(i.style.opacity);
-                        (o += .02) > 1 || (i.style.opacity = o, requestAnimationFrame(e))
-                    }()
-            }
+        function pureFadeIn(e, o) {
+            var i = document.getElementById(e);
+            i.style.opacity = 0, i.style.display = o || "block",
+                function e() {
+                    var o = parseFloat(i.style.opacity);
+                    (o += .02) > 1 || (i.style.opacity = o, requestAnimationFrame(e))
+                }()
+        }
 
-            function pureFadeOut(e) {
-                var o = document.getElementById(e);
-                o.style.opacity = 1,
-                    function e() {
-                        (o.style.opacity -= .02) < 0 ? o.style.display = "none" : requestAnimationFrame(e)
-                    }()
-            }
+        function pureFadeOut(e) {
+            var o = document.getElementById(e);
+            o.style.opacity = 1,
+                function e() {
+                    (o.style.opacity -= .02) < 0 ? o.style.display = "none" : requestAnimationFrame(e)
+                }()
+        }
 
-            function setCookie(e, o, i) {
-                var t = "";
-                if (i) {
-                    var n = new Date;
-                    n.setTime(n.getTime() + 24 * i * 60 * 60 * 1e3), t = "; expires=" + n.toUTCString()
-                }
-                document.cookie = e + "=" + (o || "") + t + "; path=/"
+        function setCookie(e, o, i) {
+            var t = "";
+            if (i) {
+                var n = new Date;
+                n.setTime(n.getTime() + 24 * i * 60 * 60 * 1e3), t = "; expires=" + n.toUTCString()
             }
+            document.cookie = e + "=" + (o || "") + t + "; path=/"
+        }
 
-            function getCookie(e) {
-                for (var o = e + "=", i = document.cookie.split(";"), t = 0; t < i.length; t++) {
-                    for (var n = i[t];
-                        " " == n.charAt(0);) n = n.substring(1, n.length);
-                    if (0 == n.indexOf(o)) return n.substring(o.length, n.length)
-                }
-                return null
+        function getCookie(e) {
+            for (var o = e + "=", i = document.cookie.split(";"), t = 0; t < i.length; t++) {
+                for (var n = i[t];
+                    " " == n.charAt(0);) n = n.substring(1, n.length);
+                if (0 == n.indexOf(o)) return n.substring(o.length, n.length)
             }
+            return null
+        }
 
-            function eraseCookie(e) {
-                document.cookie = e + "=; Max-Age=-99999999;"
-            }
+        function eraseCookie(e) {
+            document.cookie = e + "=; Max-Age=-99999999;"
+        }
 
-            function cookieConsent() {
-                getCookie("purecookieDismiss") || (document.body.innerHTML += '<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieTitle"><a>' + purecookieTitle + '</a></div><div class="cookieDesc"><p>' + purecookieDesc + " " + purecookieLink + '</p></div><div class="cookieButton"><a onClick="purecookieDismiss();">' + purecookieButton + "</a></div></div>", pureFadeIn("cookieConsentContainer"))
-            }
+        function cookieConsent() {
+            getCookie("purecookieDismiss") || (document.body.innerHTML += '<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieTitle"><a>' + purecookieTitle + '</a></div><div class="cookieDesc"><p>' + purecookieDesc + " " + purecookieLink + '</p></div><div class="cookieButton"><a onClick="purecookieDismiss();">' + purecookieButton + "</a></div></div>", pureFadeIn("cookieConsentContainer"))
+        }
 
-            function purecookieDismiss() {
-                setCookie("purecookieDismiss", "1", 7), pureFadeOut("cookieConsentContainer")
-            }
-            window.onload = function () {
-                cookieConsent()
-            };
-        </script>
+        function purecookieDismiss() {
+            setCookie("purecookieDismiss", "1", 7), pureFadeOut("cookieConsentContainer")
+        }
+        window.onload = function() {
+            cookieConsent()
+        };
+    </script>
 
 </body>
 
