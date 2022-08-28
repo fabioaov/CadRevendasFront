@@ -25,7 +25,7 @@
             right: 30px;
             display: none
         }
-        
+
         .cookieConsentContainer .cookieTitle a {
             font-family: OpenSans, arial, sans-serif;
             color: #fff;
@@ -33,7 +33,7 @@
             line-height: 20px;
             display: block
         }
-        
+
         .cookieConsentContainer .cookieDesc p {
             margin: 0;
             padding: 0;
@@ -44,13 +44,13 @@
             display: block;
             margin-top: 10px
         }
-        
+
         .cookieConsentContainer .cookieDesc a {
             font-family: OpenSans, arial, sans-serif;
             color: #fff;
             text-decoration: underline
         }
-        
+
         .cookieConsentContainer .cookieButton a {
             display: inline-block;
             font-family: OpenSans, arial, sans-serif;
@@ -64,17 +64,37 @@
             text-align: center;
             transition: background .3s
         }
-        
+
         .cookieConsentContainer .cookieButton a:hover {
             cursor: pointer;
             background: #3e9b67
         }
-        
+
+        .cont {
+            background-color: #263238 ;
+            color: #fff;
+            font-size: 15px;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .links {
+            font-size: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+
         @media (max-width:980px) {
             .cookieConsentContainer {
-                bottom: 0!important;
-                left: 0!important;
-                width: 100%!important
+                bottom: 0 !important;
+                left: 0 !important;
+                width: 100% !important
             }
         }
     </style>
@@ -87,68 +107,52 @@
         color: black;
         font-family: 'Courier New', Courier, monospace;
     }
-    
+
     nav {
         background-color: #01579b;g
         color: black;
     }
-    
+
     div#cardLogin {
         background-color: #01579b;
         color: black;
     }
-    
+
     .dark-mode {
         background-color: #263238;
         color: white;
     }
-    
+
     .dark-mode nav {
         background-color: #37474f;
         color: white;
     }
-    
+
     .dark-mode div#cardLogin {
         background-color: #37474f;
         color: white;
     }
-    
+
     .dark-mode button#bLogin {
         background-color: #607d8b;
     }
-    
+
     .light-mode {
         background-color: white;
         color: black;
     }
-    
+
     .light-mode nav {
         background-color: #01579b;
         color: black;
     }
-    
+
     .light-mode div#cardLogin {
         background-color: #01579b;
         color: black;
     }
-    .whatsapp-link {
-			position: fixed;
-			width: 60px;
-			height: 60px;
-			bottom: 40px;
-			right: 40px;
-			background-color: #25d366;
-			color: #fff;
-			border-radius: 50px;
-			text-align: center;
-			font-size: 30px;
-			box-shadow: 1px 1px 2px #888;
-			z-index: 1000;
-		}
 
-		.fa-whatsapp {
-			margin-top: 16px;
-		}
+
 </style>
 
 <body>
@@ -156,17 +160,18 @@
         <nav>
             <div class="nav-wrapper">
                 <div class="container">
-                    <a href="index.html"><img class="responsive-img" src="img/Logotipo.png" style="margin-right: 10px;"></a>
+                    <a href="index.html"><img class="responsive-img" src="img/Logotipo.png"
+                            style="margin-right: 10px;"></a>
                     <a href="index.html" class="brand-logo">CADASTRO DE REVENDAS</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li id="liPessoas"><a href="#!" v-on:click="navega('cadPessoas.html')">PESSOAS</a></li>
                         <li id="liVeiculos"><a href="#!" v-on:click="navega('cadVeiculos.html')">VEÍCULOS</a></li>
                         <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="darkMode()">
-                            <i class="material-icons" style="color: black;">brightness_4</i>
-                                      </button></li>
+                                <i class="material-icons" style="color: black;">brightness_4</i>
+                            </button></li>
                         <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="lightMode()">
-                                        <i class="material-icons" style="color: white;">brightness_5</i>
-                                                  </button></li>
+                                <i class="material-icons" style="color: white;">brightness_5</i>
+                            </button></li>
                     </ul>
                 </div>
             </div>
@@ -188,10 +193,11 @@
                             <div id="validaLogin" class="red-text center-align hide">
                                 <h6>Usuário e/ou senha inválido(s)!</h6>
                             </div>
-                            <br/>
+                            <br />
                             <div>
                                 <label>
-                                    <input type="checkbox" class="filled-in" /><span style="color: white;">LEMBRE DE MIM</span>
+                                    <input type="checkbox" class="filled-in" /><span style="color: white;">LEMBRE DE
+                                        MIM</span>
                                 </label>
                             </div>
                             <div class="card-action center-align">
@@ -208,6 +214,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="cont">
+            <p class="cont">Nossos Contatos</p>
+            <ul class="links">
+                <li><a class="redes" href="https://www.linkedin.com/in/andre-luiz-domingos-montero-b588b4173/"
+                        target="_blank">Linkedin Andre</a></li>
+                <li><a class="redes" href="https://www.linkedin.com/in/fabioaov/" target="_blank">Linkedin Fabio</a>
+                </li>
+                <li><a class="redes" href="https://www.linkedin.com/in/cayanna/" target="_blank">Linkedin Henrique</a>
+                </li>
+                <li><a class="redes" href="https://www.linkedin.com/in/welder-souza-6aa846205/" target="_blank">Linkedin Welder</a></li>
+                
+            </ul>
+        </div>
+        
         <script>
             function darkMode() {
                 var element = document.body;
@@ -340,7 +361,7 @@
             function purecookieDismiss() {
                 setCookie("purecookieDismiss", "1", 7), pureFadeOut("cookieConsentContainer")
             }
-            window.onload = function() {
+            window.onload = function () {
                 cookieConsent()
             };
         </script>
