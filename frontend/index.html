@@ -11,94 +11,93 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-    <style>
-        .cookieConsentContainer {
-            z-index: 999;
-            width: 350px;
-            min-height: 20px;
-            box-sizing: border-box;
-            padding: 30px 30px 30px 30px;
-            background: #232323;
-            overflow: hidden;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: none
-        }
-        
-        .cookieConsentContainer .cookieTitle a {
-            font-family: OpenSans, arial, sans-serif;
-            color: #fff;
-            font-size: 22px;
-            line-height: 20px;
-            display: block
-        }
-        
-        .cookieConsentContainer .cookieDesc p {
-            margin: 0;
-            padding: 0;
-            font-family: OpenSans, arial, sans-serif;
-            color: #fff;
-            font-size: 13px;
-            line-height: 20px;
-            display: block;
-            margin-top: 10px
-        }
-        
-        .cookieConsentContainer .cookieDesc a {
-            font-family: OpenSans, arial, sans-serif;
-            color: #fff;
-            text-decoration: underline
-        }
-        
-        .cookieConsentContainer .cookieButton a {
-            display: inline-block;
-            font-family: OpenSans, arial, sans-serif;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 14px;
-            background: #000;
-            box-sizing: border-box;
-            padding: 15px 24px;
-            text-align: center;
-            transition: background .3s
-        }
-        
-        .cookieConsentContainer .cookieButton a:hover {
-            cursor: pointer;
-            background: #3e9b67
-        }
-        
-        .cont {
-            background-color: #263238;
-            color: #fff;
-            font-size: 15px;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .links {
-            font-size: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        @media (max-width:980px) {
-            .cookieConsentContainer {
-                bottom: 0 !important;
-                left: 0 !important;
-                width: 100% !important
-            }
-        }
-    </style>
-
 </head>
+
 <style>
+    .cookieConsentContainer {
+        z-index: 999;
+        width: 350px;
+        min-height: 20px;
+        box-sizing: border-box;
+        padding: 30px 30px 30px 30px;
+        background: #232323;
+        overflow: hidden;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: none
+    }
+    
+    .cookieConsentContainer .cookieTitle a {
+        font-family: OpenSans, arial, sans-serif;
+        color: #fff;
+        font-size: 22px;
+        line-height: 20px;
+        display: block
+    }
+    
+    .cookieConsentContainer .cookieDesc p {
+        margin: 0;
+        padding: 0;
+        font-family: OpenSans, arial, sans-serif;
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+        display: block;
+        margin-top: 10px
+    }
+    
+    .cookieConsentContainer .cookieDesc a {
+        font-family: OpenSans, arial, sans-serif;
+        color: #fff;
+        text-decoration: underline
+    }
+    
+    .cookieConsentContainer .cookieButton a {
+        display: inline-block;
+        font-family: OpenSans, arial, sans-serif;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        margin-top: 14px;
+        background: #000;
+        box-sizing: border-box;
+        padding: 15px 24px;
+        text-align: center;
+        transition: background .3s
+    }
+    
+    .cookieConsentContainer .cookieButton a:hover {
+        cursor: pointer;
+        background: #3e9b67
+    }
+    
+    .cont {
+        background-color: #263238;
+        color: #fff;
+        font-size: 15px;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .links {
+        font-size: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    @media (max-width:980px) {
+        .cookieConsentContainer {
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important
+        }
+    }
+    
     body {
         background-color: white;
         color: black;
@@ -203,9 +202,9 @@
                                 <button id="bLogin" class="btn" v-on:click="fazerLogin()">LOGIN</button>
                                 <ul class="es">
                                     <li>
-                                        <span >Não tem conta? </span><a href="./Registra-se.html">Criar</a>
+                                        <span>Não tem conta? </span><a href="./Registra-se.html">Criar</a>
                                     </li>
-                                    <li ><span >Esqueceu sua senha ?</span>
+                                    <li><span>Esqueceu sua senha ?</span>
                                         <a href="redSenha.html">Redefinir</a>
                                     </li>
 
@@ -319,8 +318,7 @@
                 },
             },
         });
-    </script>
-    <script>
+
         var purecookieTitle = "Cookies.",
             purecookieDesc = "Este site utiliza cookies para te proporcionar uma melhor experiência. Ao continuar navegando, você aceita nossa.",
             purecookieLink = '<a href="https://unisales.br/" target="_blank">Politica de privacidade</a>',
@@ -376,7 +374,6 @@
             cookieConsent()
         };
     </script>
-
 </body>
 
 

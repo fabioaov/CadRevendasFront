@@ -6,81 +6,223 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registra-se</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <style>
-        .res {
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
         }
-
-        .title {
-            background-color: darkslategrey;
-            border: 1px solid white;
-            color: white;
-            text-align: center;
-            font-size: 25px;
-
+        
+        nav {
+            background-color: #4527a0;
+            color: black;
         }
-
-        .ul {
-            background-color: darkslategrey;
+        
+        ul#ul {
+            margin-top: -10px;
+            background-color: #673ab7;
             padding: 10px;
             border: 2px solid black;
             list-style-type: none;
             justify-content: center;
             align-items: center;
         }
-
-        .ids {
+        
+        div#ids {
             font-size: 20px;
         }
-        .enviar{
-            margin-left: 85px;
+        
+        div#mCard {
+            background-color: #5e35b1;
+            color: white;
+        }
+        
+        div#mmCard {
+            background-color: #5e35b1;
+            color: black;
+        }
+        
+        ul#nomeL {
+            margin-block: initial;
+            font-size: 30px;
+        }
+        
+        input#enviar {
+            margin-left: 125px;
             margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #b39ddb;
+            color: black;
+        }
+        
+        .dark-mode {
+            background-color: #263238;
+            color: white;
+        }
+        
+        .dark-mode ul#ul {
+            background-color: #37474f;
+            padding: 10px;
+            border: 2px solid black;
+            list-style-type: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dark-mode nav {
+            background-color: #37474f;
+            color: white;
+        }
+        
+        .dark-mode div#cRegistro {
+            background-color: #37474f;
+            color: white;
+        }
+        
+        .dark-mode div#cCard {
+            background-color: #37474f;
+            color: white;
+        }
+        
+        .dark-mode div#mCard {
+            background-color: #37474f;
+            color: white;
+        }
+        
+        .dark-mode div#mmCard {
+            background-color: #37474f;
+            color: white;
+        }
+        
+        .dark-mode input#enviar {
+            background-color: #607d8b;
+            color: white;
+        }
+        
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+        
+        .light-mode nav {
+            background-color: #4527a0;
+            color: black;
+        }
+        
+        .light-mode div#cCard {
+            background-color: #ffe0b2;
+            color: black;
+        }
+        
+        .light-mode div#mCard {
+            background-color: #5e35b1;
+            color: white;
+        }
+        
+        .light-mode div#mmCard {
+            background-color: #5e35b1;
+            color: black;
+        }
+        
+        .light-mode input#enviar {
+            background-color: #b39ddb;
+            color: black;
         }
     </style>
 </head>
 
 <body>
-    <h1 class="title">Registra-se <br></h1>
-    <form name="meu_form" class="res">
+    <div id="app">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="container">
+                    <a class="brand-logo">CADASTRO</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="index.html">INÍCIO</a></li>
+                        <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="darkMode()">
+                                <i class="material-icons" style="color: black;">brightness_4</i>
+                            </button></li>
+                        <li><button class="btn-flat" style="height:100%;margin:auto;" onclick="lightMode()">
+                                <i class="material-icons" style="color: white;">brightness_5</i>
+                            </button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col s6">
+                    <div id="cCard" class="card" style="margin-top: 20%;">
+                        <div class="card-image">
+                            <img src="img/969fae33768daf19ef366f4a9dd83fbc.jpg">
+                            <span class="card-title" style="font-size: 35px;">CRIE SUA CONTA AQUI!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s4 m4" style="margin-top: 120px;">
+                    <div id="mmCard" class="card">
+                        <div id="mCard" class="card" style="text-align: center;">
+                            <span class="card-title" style="font-size: 30px;">REGISTRE-SE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <form name="meu_form">
+                            <div id="ids">
+                                <ul id="ul">
+                                    <li>
+                                        <label for="email" style="color:black">EMAIL</label>
+                                        <input type="email" id="emailid" placeholder="exemplo@mail.com" style="color:black" name="email" />
 
-        <div class="ids">
-            <ul class="ul">
-                <li>
-                    <label for="email">Email</label>
-                    <input type="email" id="emailid" placeholder="fulano@mail.com" name="email" />
+                                    </li>
+                                    <li>
+                                        <label for="senha" style="color:black">SENHA</label>
+                                        <input type="password" id="senhaid" placeholder="********" style="color:black" name="senha" minlength="8" required />
 
-                </li>
-                <li>
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senhaid" placeholder="*****" name="senha" minlength="8" required />
+                                    </li>
 
-                </li>
-
-                <li>
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senhasid" placeholder="*****" name="senha" minlength="8" required />
-                </li>
-                <li>
-                    <input type="submit" class="enviar" onclick="Enviar();" value="Registrar" />
-                </li>
-            </ul>
+                                    <li>
+                                        <label for="senha" style="color:black">CONFIRMAÇÃO SENHA</label>
+                                        <input type="password" id="senhasid" placeholder="********" style="color:black" name="senha" minlength="8" required />
+                                    </li>
+                                    <br/>
+                                    <li>
+                                        <input class="btn" type="submit" id="enviar" onclick="enviar();" value="REGISTRAR" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
 </body>
 <script>
-    function Enviar() {
+    function enviar() {
 
-var nome = document.getElementById("emailid");
+        var nome = document.getElementById("emailid");
 
-if (nome.value != "") {
-    alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram Registrado com sucesso');
-}
+        if (nome.value != "") {
+            alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram Registrado com sucesso');
+        }
+    }
 
-}
+    function darkMode() {
+        var element = document.body;
+        var content = document.getElementById("DarkModetext ");
+        element.className = "dark-mode ";
+    }
+
+    function lightMode() {
+        var element = document.body;
+        var content = document.getElementById("LightModetext ");
+        element.className = "light-mode ";
+    }
 </script>
 
 </html>
