@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <style>
@@ -105,7 +106,7 @@
     }
     
     nav {
-        background-color: #01579b;g
+        background-color: #01579b;
         color: black;
     }
     
@@ -146,6 +147,25 @@
     .light-mode div#cardLogin {
         background-color: #01579b;
         color: black;
+    }
+    
+    .whatsapp-link {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 1px 1px 2px #888;
+        z-index: 1000;
+    }
+    
+    .fa-whatsapp {
+        margin-top: 16px;
     }
     
     .btn-floating#btnContato {
@@ -318,7 +338,6 @@
                 },
             },
         });
-
         var purecookieTitle = "Cookies.",
             purecookieDesc = "Este site utiliza cookies para te proporcionar uma melhor experiência. Ao continuar navegando, você aceita nossa.",
             purecookieLink = '<a href="https://unisales.br/" target="_blank">Politica de privacidade</a>',
@@ -374,7 +393,9 @@
             cookieConsent()
         };
     </script>
+    <a class="whatsapp-link" href="https://web.whatsapp.com/send?phone=5599111112222" target="_blank">
+        <i class="fa fa-whatsapp"></i>
+    </a>
 </body>
-
 
 </html>
