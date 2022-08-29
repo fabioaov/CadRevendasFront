@@ -1,6 +1,6 @@
 # Descrição
 
-Junção dos projetos finais das matérias de Projeto de Website Institucional - Back End e Front End.
+Projeto final da matéria Projeto de Website Institucional - Front End.
 
 ##### Colaboradores:
 
